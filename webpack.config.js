@@ -2,18 +2,27 @@ const path = require('path');
 const webpack = require('webpack');
 
 
-const client = {
+// TODO: prepare for production
+
+const PATHS = {
+	dist: path.resolve(__dirname, 'build'),
+	src: path.resolve(__dirname, 'src'),
+	client: path.resolve(__dirname, 'src/client'),
+	server: path.resolve(__dirname, 'src/server'),
+};
+
+const CLIENT = {
 	name: 'client',
 	target: 'web',
 	entry: [
 		'react-hot-loader/patch',
 		'webpack-hot-middleware/client',
-		'./client.jsx'
+		path.join(PATHS.client, 'client.jsx')
 	],
 	output: {
-		path: path.join(__dirname, 'static'),
+		path: PATHS.dist,
 		filename: 'client.js',
-		publicPath: '/static/',
+		publicPath: '/build/',
 	},
 	resolve: {
 		extensions: ['.js', '.jsx']
@@ -58,15 +67,15 @@ const client = {
 };
 
 
-const server = {
+const SERVER = {
 	name: 'server',
 	target: 'node',
-	entry: './server.jsx',
+	entry: path.join(PATHS.server, 'server.jsx'),
 	output: {
-		path: path.join(__dirname, 'static'),
+		path: PATHS.dist,
 		filename: 'server.js',
 		libraryTarget: 'commonjs2',
-		publicPath: '/static/',
+		publicPath: '/build/',
 	},
 	devtool: 'source-map',
 	resolve: {
@@ -107,4 +116,4 @@ const server = {
 	},
 };
 
-module.exports = [client, server];
+module.exports = [CLIENT, SERVER];
