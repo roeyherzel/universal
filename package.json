@@ -4,15 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=development babel-node ./src/server",
+    "start": "NODE_ENV=development babel-node ./server",
     "build": "NODE_ENV=production webpack",
-    "serve": "NODE_ENV=production babel-node ./src/server",
-    "lint": "eslint ./src --fix",
+    "serve": "NODE_ENV=production babel-node ./server",
+    "lint": "eslint ./ --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "morgan": "^1.9.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

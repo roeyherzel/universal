@@ -15,9 +15,10 @@ const CLIENT = {
     name: 'client',
     target: 'web',
     entry: [
+        'babel-polyfill',
         'react-hot-loader/patch',
         'webpack-hot-middleware/client',
-        path.join(PATHS.client, 'client.jsx'),
+        PATHS.client,
     ],
     output: {
         path: PATHS.dist,
@@ -70,7 +71,7 @@ const CLIENT = {
 const SERVER = {
     name: 'server',
     target: 'node',
-    entry: path.join(PATHS.server, 'server.jsx'),
+    entry: PATHS.server,
     output: {
         path: PATHS.dist,
         filename: 'server.js',

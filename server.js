@@ -9,11 +9,11 @@ const port = 3000;
 
 
 if (process.env.NODE_ENV !== 'production') {
-    const devServer = require('./devServer').default;
+    const devServer = require('./src/server/dev').default;
     app.use(devServer);
 } else {
     const ClientStatsPath = path.join(__dirname, './build/stats.json');
-    const ServerRendererPath = path.join(__dirname, './build/server.js');
+    const ServerRendererPath = path.join(__dirname, './build/server');
     const ServerRenderer = require(ServerRendererPath).default;
     const Stats = require(ClientStatsPath);
 
