@@ -1,5 +1,5 @@
-const path = require('path');
-const webpack = require('webpack');
+import path from 'path';
+import webpack from 'webpack';
 
 
 // TODO: prepare for production
@@ -116,4 +116,4 @@ const SERVER = {
 	},
 };
 
-module.exports = [CLIENT, SERVER];
+export default [CLIENT, SERVER];
