@@ -11,7 +11,9 @@ const compiler = webpack(config);
 app.use(webpackDevMiddleware(compiler, {
 	publicPath: "/static/",
 }));
+
 app.use(webpackHotMiddleware(compiler.compilers.find(compiler => compiler.name === 'client')));
+
 app.use(webpackHotServerMiddleware(compiler));
 
 app.listen(3000);

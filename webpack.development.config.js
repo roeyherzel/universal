@@ -1,10 +1,16 @@
 const path = require('path');
+const webpack = require('webpack');
+
 
 module.exports = [
 	{
 		name: 'client',
 		target: 'web',
-		entry: './client.jsx',
+		entry: [
+			'react-hot-loader/patch',
+			'webpack-hot-middleware/client',
+			'./client.jsx'
+		],
 		output: {
 			path: path.join(__dirname, 'static'),
 			filename: 'client.js',
@@ -47,6 +53,9 @@ module.exports = [
 				}
 			],
 		},
+		plugins: [
+			new webpack.HotModuleReplacementPlugin(),
+		]
 	},
 	{
 		name: 'server',
@@ -92,7 +101,7 @@ module.exports = [
 							loader: 'sass-loader'
 						}
 					]
-				} 
+				}
 			],
 		},
 	}
