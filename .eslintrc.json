@@ -1,0 +1,21 @@
+{
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    "padded-blocks": "off",
+    "camelcase": "off",
+    "import/first": "off",
+    "no-underscore-dangle": "off",
+    // should be project's dep, not devDep
+    "import/no-extraneous-dependencies": 0,
+    // jsx in js files
+    "react/jsx-filename-extension": 0,
+    "jsx-a11y/anchor-is-valid": "warn",
+    "indent": ["error", 4, { "SwitchCase": 1 }],
+    "react/jsx-indent": ["error", 4],
+    "react/jsx-indent-props": ["error", 4]
+  }
+}

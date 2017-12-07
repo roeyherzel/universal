@@ -13,13 +13,13 @@ const compiler = webpack(config);
 router.use(morgan('dev'));
 
 router.use(webpackDevMiddleware(compiler, {
-  serverSideRender: true,
-  publicPath: "/build/",
-  stats: 'minimal',
+    serverSideRender: true,
+    publicPath: '/build/',
+    stats: 'minimal',
 }));
 
 // NOTE: Only the client bundle needs to be passed to `webpack-hot-middleware`.
-router.use(webpackHotMiddleware(compiler.compilers.find(compiler => compiler.name === 'client')));
+router.use(webpackHotMiddleware(compiler.compilers.find(c => c.name === 'client')));
 
 router.use(webpackHotServerMiddleware(compiler));
 
