@@ -8,6 +8,6 @@ export default ({ markup, helmet }) => `
     </head>
     <body ${helmet.bodyAttributes.toString()}>
         <div id="root">${markup}</div>
-        <script src="/build/client.js"></script>
+        <script src="/build/client.bundle.js"></script>
     </body>
 </html>`;

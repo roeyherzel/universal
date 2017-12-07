@@ -1,8 +1,11 @@
 import path from 'path';
 import webpack from 'webpack';
+import CleanWebpackPlugin from 'clean-webpack-plugin';
 
 
 // TODO: prepare for production
+const env = process.env.NODE_ENV || 'development';
+
 
 const PATHS = {
     dist: path.resolve(__dirname, 'build'),
@@ -21,31 +24,31 @@ const CLIENT = {
         PATHS.client,
     ],
     output: {
+        filename: 'client.bundle.js',
         path: PATHS.dist,
-        filename: 'client.js',
         publicPath: '/build/',
     },
     resolve: {
         extensions: ['.js', '.jsx'],
+        modules: ['node_modules'],
     },
+    plugins: [
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NamedModulesPlugin(),
+        new CleanWebpackPlugin([PATHS.dist]),
+    ],
     devtool: 'source-map',
     module: {
         rules: [
             {
                 test: /\.(js|jsx)$/,
-                exclude: /(node_modules\/)/,
-                use: [
-                    {
-                        loader: 'babel-loader',
-                    },
-                ],
+                exclude: /node_modules/,
+                loader: 'babel-loader',
             },
             {
                 test: /\.scss$/,
                 use: [
-                    {
-                        loader: 'style-loader',
-                    },
+                    'style-loader',
                     {
                         loader: 'css-loader',
                         options: {
@@ -55,16 +58,11 @@ const CLIENT = {
                             sourceMap: true,
                         },
                     },
-                    {
-                        loader: 'sass-loader',
-                    },
+                    'sass-loader',
                 ],
             },
         ],
     },
-    plugins: [
-        new webpack.HotModuleReplacementPlugin(),
-    ],
 };
 
 
@@ -73,32 +71,26 @@ const SERVER = {
     target: 'node',
     entry: PATHS.server,
     output: {
+        filename: 'server.bundle.js',
         path: PATHS.dist,
-        filename: 'server.js',
-        libraryTarget: 'commonjs2',
         publicPath: '/build/',
+        libraryTarget: 'commonjs2',
     },
-    devtool: 'source-map',
     resolve: {
         extensions: ['.js', '.jsx'],
     },
+    devtool: 'source-map',
     module: {
         rules: [
             {
                 test: /\.(js|jsx)$/,
-                exclude: /(node_modules\/)/,
-                use: [
-                    {
-                        loader: 'babel-loader',
-                    },
-                ],
+                exclude: /node_modules/,
+                loader: 'babel-loader',
             },
             {
                 test: /\.scss$/,
                 use: [
-                    {
-                        loader: 'isomorphic-style-loader',
-                    },
+                    'isomorphic-style-loader',
                     {
                         loader: 'css-loader',
                         options: {
@@ -108,9 +100,7 @@ const SERVER = {
                             sourceMap: true,
                         },
                     },
-                    {
-                        loader: 'sass-loader',
-                    },
+                    'sass-loader',
                 ],
             },
         ],
